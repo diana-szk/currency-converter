@@ -1,9 +1,9 @@
 <h1>Currency Converter</h1>
 
 <div class="container" *ngIf="rates">
-    <input type="number" placeholder="amount" [(ngModel)]="amount">
+    <input type="number" placeholder="amount" [(ngModel)]="amount" (ngModelChange)="onNumberChange($event)">
     <label >From: </label>
-    <select [(ngModel)]="from" (chage)="loadRates()">
+    <select [(ngModel)]="from" (change)="loadRates()">
     <option *ngFor="let c of getAllCurrencies()" [value]="c">{{c}}</option>
     </select>
 
@@ -12,5 +12,5 @@
     <option *ngFor="let c of getAllCurrencies()" [value]="c">{{c}}</option>
     </select>
     <br>
-    <b [style.color]="amount < 0 ? 'red' : ''">{{ amount.toFixed(2) }} {{from}} = {{convert().toFixed(2)}} {{to}}</b>
+    <b *ngIf="amount > 0 ">{{ amount.toFixed(2) }} {{from}} = {{convert().toFixed(2)}} {{to}}</b>
 </div>
